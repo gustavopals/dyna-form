@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PoToolbarModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoToolbarModule } from '@po-ui/ng-components';
 import { DyfFormComponent, DyfGridComponent, DyfDetailComponent, DyfTable } from 'dynaform';
 
 const SAMPLE_TABLE: DyfTable = {
@@ -19,7 +19,7 @@ const SAMPLE_TABLE: DyfTable = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PoToolbarModule, DyfFormComponent, DyfGridComponent, DyfDetailComponent],
+  imports: [PoToolbarModule, PoButtonModule, DyfFormComponent, DyfGridComponent, DyfDetailComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
