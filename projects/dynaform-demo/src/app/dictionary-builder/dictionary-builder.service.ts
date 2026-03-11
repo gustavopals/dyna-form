@@ -15,7 +15,12 @@ export class DictionaryBuilderService {
 
   load(tableName: string, revision: number): DyfTable | null {
     const raw = localStorage.getItem(this.storageKey(tableName, revision));
-    return raw ? (JSON.parse(raw) as DyfTable) : null;
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as DyfTable;
+    } catch {
+      return null;
+    }
   }
 
   loadAll(): DyfTable[] {

@@ -44,4 +44,10 @@ describe('DictionaryBuilderService', () => {
   it('should export JSON with 2-space indent', () => {
     expect(service.exportJson(MOCK_TABLE)).toBe(JSON.stringify(MOCK_TABLE, null, 2));
   });
+
+  it('should copy JSON to clipboard', async () => {
+    const writeTextSpy = spyOn(navigator.clipboard, 'writeText').and.returnValue(Promise.resolve());
+    await service.copyToClipboard(MOCK_TABLE);
+    expect(writeTextSpy).toHaveBeenCalledWith(service.exportJson(MOCK_TABLE));
+  });
 });
