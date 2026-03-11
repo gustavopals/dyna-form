@@ -50,4 +50,9 @@ describe('DictionaryBuilderService', () => {
     await service.copyToClipboard(MOCK_TABLE);
     expect(writeTextSpy).toHaveBeenCalledWith(service.exportJson(MOCK_TABLE));
   });
+
+  it('should return null when stored entry is corrupt JSON', () => {
+    localStorage.setItem('dyf_table_test_table_1', '{not valid json}');
+    expect(service.load('test_table', 1)).toBeNull();
+  });
 });
