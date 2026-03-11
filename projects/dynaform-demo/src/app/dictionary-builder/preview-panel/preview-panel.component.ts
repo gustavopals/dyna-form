@@ -34,9 +34,17 @@ export class PreviewPanelComponent {
         case 'number':   data[field.property] = 42; break;
         case 'currency': data[field.property] = 99.90; break;
         case 'boolean':  data[field.property] = true; break;
-        case 'date':     data[field.property] = '2026-03-11'; break;
-        case 'dateTime': data[field.property] = '2026-03-11T10:00:00'; break;
+        case 'date': {
+          const today = new Date().toISOString().split('T')[0];
+          data[field.property] = today;
+          break;
+        }
+        case 'dateTime': {
+          data[field.property] = new Date().toISOString().slice(0, 19);
+          break;
+        }
         case 'time':     data[field.property] = '10:00:00'; break;
+        default: data[field.property] = null; break;
       }
     }
     return data;
