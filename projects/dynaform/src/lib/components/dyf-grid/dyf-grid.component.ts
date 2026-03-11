@@ -9,7 +9,7 @@ import { DyfFormBuilderService } from '../../services/dyf-form-builder.service';
   standalone: true,
   imports: [CommonModule, PoTableModule],
   templateUrl: './dyf-grid.component.html',
-  styles: []
+  styles: [],
 })
 export class DyfGridComponent implements OnInit {
   @Input({ required: true }) table!: DyfTable;
@@ -26,7 +26,7 @@ export class DyfGridComponent implements OnInit {
   constructor(private builder: DyfFormBuilderService) {}
 
   ngOnInit(): void {
-    this.columns = this.builder.buildPoTableColumns(this.table);
+    this.columns = this.builder.buildGridColumns(this.table);
     this.actions = [
       { label: 'Visualizar', action: (row: any) => this.view.emit(row) },
       { label: 'Editar', action: (row: any) => this.edit.emit(row) },
