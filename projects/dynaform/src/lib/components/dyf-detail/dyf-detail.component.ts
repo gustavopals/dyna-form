@@ -9,7 +9,7 @@ import { DyfFormBuilderService } from '../../services/dyf-form-builder.service';
   standalone: true,
   imports: [CommonModule, PoDynamicModule],
   templateUrl: './dyf-detail.component.html',
-  styles: []
+  styles: [],
 })
 export class DyfDetailComponent implements OnInit {
   @Input({ required: true }) table!: DyfTable;
@@ -20,12 +20,6 @@ export class DyfDetailComponent implements OnInit {
   constructor(private builder: DyfFormBuilderService) {}
 
   ngOnInit(): void {
-    const fields = this.builder.getDetailFields(this.table);
-    this.poFields = fields.map(f => ({
-      property: f.property,
-      label: f.label,
-      type: f.type as any,
-      gridColumns: f.gridColumns,
-    }));
+    this.poFields = this.builder.buildDetailFields(this.table);
   }
 }
