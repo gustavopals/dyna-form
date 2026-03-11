@@ -1,0 +1,32 @@
+<div class="po-p-4" style="border: 1px solid #e0e0e0; border-radius: 4px; background: #fafafa;">
+
+  @if (!hasFields) {
+    <p class="po-text-center po-text-color-neutral-mid-40">
+      Adicione campos para ver o preview.
+    </p>
+  } @else {
+    <po-tabs>
+      <po-tab p-label="Formulário">
+        <dyf-form
+          [table]="table"
+          [value]="fakeData">
+        </dyf-form>
+      </po-tab>
+
+      <po-tab p-label="Grid">
+        <dyf-grid
+          [table]="table"
+          [items]="fakeItems">
+        </dyf-grid>
+      </po-tab>
+
+      <po-tab p-label="Detalhes">
+        <dyf-detail
+          [table]="table"
+          [value]="fakeData">
+        </dyf-detail>
+      </po-tab>
+    </po-tabs>
+  }
+
+</div>
