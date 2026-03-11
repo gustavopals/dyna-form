@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   PoButtonModule,
+  PoDividerModule,
   PoFieldModule,
   PoModalAction,
   PoModalComponent,
@@ -12,7 +13,7 @@ import { DyfField, DyfFieldOption, DyfFieldType } from 'dynaform';
 @Component({
   selector: 'app-field-editor-modal',
   standalone: true,
-  imports: [FormsModule, PoModalModule, PoFieldModule, PoButtonModule],
+  imports: [FormsModule, PoModalModule, PoFieldModule, PoButtonModule, PoDividerModule],
   templateUrl: './field-editor-modal.component.html',
 })
 export class FieldEditorModalComponent {

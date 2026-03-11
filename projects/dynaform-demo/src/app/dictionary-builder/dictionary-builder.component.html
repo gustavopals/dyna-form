@@ -1,0 +1,162 @@
+<div class="po-wrapper">
+  <div class="po-p-4">
+
+    <!-- Header -->
+    <div class="po-mb-4 po-d-flex po-row po-justify-content-between po-align-items-center">
+      <h2 class="po-title">Builder de Dicionário</h2>
+      <div class="po-d-flex po-row" style="gap: 8px;">
+        <po-button
+          p-label="Preview"
+          p-kind="secondary"
+          p-icon="po-icon-eye"
+          (p-click)="togglePreview()">
+        </po-button>
+        <po-button
+          p-label="Copiar JSON"
+          p-kind="secondary"
+          p-icon="po-icon-copy"
+          (p-click)="copyJson()">
+        </po-button>
+        <po-button
+          p-label="Salvar"
+          p-kind="primary"
+          p-icon="po-icon-save"
+          [p-disabled]="!canSave"
+          (p-click)="save()">
+        </po-button>
+      </div>
+    </div>
+
+    <!-- BLOCO 1: Dados da Tabela -->
+    <po-divider p-label="Dados da Tabela"></po-divider>
+    <div class="po-row">
+      <po-input
+        class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+        name="tableName"
+        p-label="tableName *"
+        p-placeholder="ex: customers"
+        [(ngModel)]="tableForm.tableName">
+      </po-input>
+
+      <po-number
+        class="po-xl-2 po-lg-2 po-md-2 po-sm-6"
+        name="revision"
+        p-label="Revision *"
+        [p-min]="1"
+        [(ngModel)]="tableForm.revision">
+      </po-number>
+
+      <po-input
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+        name="label"
+        p-label="Label *"
+        p-placeholder="ex: Clientes"
+        [(ngModel)]="tableForm.label">
+      </po-input>
+
+      <po-input
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+        name="description"
+        p-label="Descrição"
+        [(ngModel)]="tableForm.description">
+      </po-input>
+
+      <po-input
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+        name="endpoint"
+        p-label="Endpoint"
+        p-placeholder="/api/customers"
+        [(ngModel)]="tableForm.endpoint">
+      </po-input>
+    </div>
+
+    <!-- BLOCO 2: Campos -->
+    <po-divider p-label="Campos"></po-divider>
+    <div class="po-mt-2 po-mb-2 po-d-flex po-row po-justify-content-end">
+      <po-button
+        p-label="Adicionar Campo"
+        p-kind="primary"
+        p-icon="po-icon-plus"
+        (p-click)="openAddField()">
+      </po-button>
+    </div>
+
+    <po-table
+      [p-columns]="fieldColumns"
+      [p-items]="fields"
+      [p-actions]="fieldActions"
+      p-striped="true">
+    </po-table>
+
+    <!-- BLOCO 3: Folders -->
+    <div class="po-mt-4">
+      <div class="po-d-flex po-row po-justify-content-between po-align-items-center po-mb-2">
+        <po-button
+          [p-label]="showFolders ? 'Ocultar Folders' : 'Mostrar Folders'"
+          p-kind="tertiary"
+          [p-icon]="showFolders ? 'po-icon-arrow-up' : 'po-icon-arrow-down'"
+          (p-click)="toggleFolders()">
+        </po-button>
+        @if (showFolders) {
+          <po-button
+            p-label="Adicionar Folder"
+            p-kind="secondary"
+            p-icon="po-icon-plus"
+            (p-click)="openAddFolder()">
+          </po-button>
+        }
+      </div>
+
+      @if (showFolders) {
+        <po-table
+          [p-columns]="folderColumns"
+          [p-items]="folders"
+          [p-actions]="folderTableActions"
+          p-striped="true">
+        </po-table>
+      }
+    </div>
+
+    <!-- PREVIEW -->
+    @if (showPreview) {
+      <div class="po-mt-4">
+        <po-divider p-label="Preview ao Vivo"></po-divider>
+        <app-preview-panel [table]="currentTable"></app-preview-panel>
+      </div>
+    }
+
+  </div>
+</div>
+
+<!-- Modal: FieldEditor -->
+<app-field-editor-modal #fieldModal (fieldSaved)="onFieldSaved($event)"></app-field-editor-modal>
+
+<!-- Modal: Folder Editor -->
+<po-modal
+  #folderModal
+  p-title="Folder"
+  [p-primary-action]="folderPrimaryAction"
+  [p-secondary-action]="folderSecondaryAction">
+  <div class="po-row">
+    <po-input
+      class="po-xl-6 po-lg-6 po-sm-12"
+      name="folderId"
+      p-label="folderId *"
+      p-placeholder="ex: dados_pessoais"
+      [(ngModel)]="editingFolder.folderId">
+    </po-input>
+    <po-input
+      class="po-xl-4 po-lg-4 po-sm-12"
+      name="folderLabel"
+      p-label="Label *"
+      p-placeholder="ex: Dados Pessoais"
+      [(ngModel)]="editingFolder.label">
+    </po-input>
+    <po-number
+      class="po-xl-2 po-lg-2 po-sm-12"
+      name="folderOrder"
+      p-label="Ordem"
+      [(ngModel)]="editingFolder.order">
+    </po-number>
+  </div>
+</po-modal>

@@ -50,7 +50,8 @@
       name="type"
       p-label="Tipo *"
       [p-options]="typeOptions"
-      [(ngModel)]="field.type">
+      [ngModel]="field.type"
+      (ngModelChange)="field.type = $event">
     </po-select>
 
     <po-switch
@@ -75,8 +76,8 @@
       class="po-xl-3 po-lg-3 po-md-3 po-sm-6"
       name="gridColumns"
       p-label="Grid Columns (1–12)"
-      p-min="1"
-      p-max="12"
+      [p-min]="1"
+      [p-max]="12"
       [(ngModel)]="field.gridColumns">
     </po-number>
 
@@ -86,7 +87,8 @@
         name="folderId"
         p-label="Folder"
         [p-options]="folderOptions"
-        [(ngModel)]="field.folderId">
+        [ngModel]="field.folderId"
+        (ngModelChange)="field.folderId = $event">
       </po-select>
     }
 
