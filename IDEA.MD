@@ -87,11 +87,11 @@ export class AppModule { }
 
 ## Roadmap
 
-1. [ ] Definir estrutura completa das tabelas DYF_*
-2. [ ] Criar componentes base da library
-3. [ ] Implementar renderização dinâmica de formulários
-4. [ ] Implementar tela de listagem dinâmica
-5. [ ] Implementar tela de visualização dinâmica
+1. [x] Definir estrutura completa das tabelas DYF_*
+2. [x] Criar componentes base da library
+3. [x] Implementar renderização dinâmica de formulários
+4. [x] Implementar tela de listagem dinâmica
+5. [x] Implementar tela de visualização dinâmica
 6. [ ] Criar interface de cadastro do dicionário
 7. [ ] Publicar primeira versão no npm
 8. [ ] Documentação e exemplos de uso
