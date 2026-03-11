@@ -151,7 +151,7 @@
     <!-- OPÇÕES -->
     <po-divider p-label="Opções (select/radio)" class="po-xl-12 po-lg-12"></po-divider>
 
-    @for (opt of field.options; track $index) {
+    @for (opt of field.options; track opt) {
       <po-input class="po-xl-5 po-lg-5 po-md-5 po-sm-5" [name]="'opt_label_' + $index" p-label="Label" [(ngModel)]="opt.label"></po-input>
       <po-input class="po-xl-5 po-lg-5 po-md-5 po-sm-5" [name]="'opt_value_' + $index" p-label="Value" [(ngModel)]="opt.value"></po-input>
       <div class="po-xl-2 po-lg-2 po-md-2 po-sm-2 po-d-flex po-align-items-end po-pb-1">

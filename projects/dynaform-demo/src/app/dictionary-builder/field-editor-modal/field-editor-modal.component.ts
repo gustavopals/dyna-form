@@ -97,18 +97,18 @@ export class FieldEditorModalComponent {
     if (this.field.visibleOnDetail !== undefined) result.visibleOnDetail = this.field.visibleOnDetail;
 
     // core
-    if (this.field.key) result.key = this.field.key;
-    if (this.field.required) result.required = this.field.required;
-    if (this.field.disabled) result.disabled = this.field.disabled;
-    if (this.field.readonly) result.readonly = this.field.readonly;
-    if (this.field.clean) result.clean = this.field.clean;
+    if (this.field.key !== undefined) result.key = this.field.key;
+    if (this.field.required !== undefined) result.required = this.field.required;
+    if (this.field.disabled !== undefined) result.disabled = this.field.disabled;
+    if (this.field.readonly !== undefined) result.readonly = this.field.readonly;
+    if (this.field.clean !== undefined) result.clean = this.field.clean;
     if (this.field.placeholder) result.placeholder = this.field.placeholder;
 
     // string-specific
     if (this.isString) {
       if (this.field.mask) result.mask = this.field.mask;
-      if (this.field.maxLength) result.maxLength = this.field.maxLength;
-      if (this.field.minLength) result.minLength = this.field.minLength;
+      if (this.field.maxLength !== undefined) result.maxLength = this.field.maxLength;
+      if (this.field.minLength !== undefined) result.minLength = this.field.minLength;
       if (this.field.rows && this.field.rows > 1) result.rows = this.field.rows;
       if (this.field.secret) result.secret = this.field.secret;
     }
