@@ -11,12 +11,14 @@ export type DyfFieldType =
 
 export interface DyfFieldOption {
   label: string;
-  value: any;
+  value: string | number | boolean;
 }
 
 export interface DyfField {
   // identidade
+  /** Identificador único do campo dentro do dicionário (chave no schema DYF_FIELDS). */
   fieldName: string;
+  /** Nome da propriedade no objeto de dados em runtime (ex: 'customerName'). */
   property: string;
   label: string;
   type: DyfFieldType;
@@ -30,6 +32,7 @@ export interface DyfField {
   visibleOnGrid?: boolean;
   visibleOnForm?: boolean;
   visibleOnDetail?: boolean;
+  /** Marca este campo como chave primária da entidade. Usado pelo dyf-grid para identificar linhas nas ações. */
   key?: boolean;
 
   // core
@@ -47,6 +50,11 @@ export interface DyfField {
   secret?: boolean;
 
   // select / combo / multiselect / radiogroup / checkbox
+  // Componente renderizado depende da combinação de type + estas props:
+  // - options (≤3 items) → po-radio-group | options (>3) → po-select
+  // - optionsService → po-combo
+  // - optionsMulti: true → po-multiselect
+  // - type: 'boolean' → po-switch | po-checkbox
   options?: DyfFieldOption[];
   optionsMulti?: boolean;
   optionsService?: string;
