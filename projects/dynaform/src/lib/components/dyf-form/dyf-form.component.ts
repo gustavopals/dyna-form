@@ -14,7 +14,7 @@ import { DyfFormBuilderService } from '../../services/dyf-form-builder.service';
   standalone: true,
   imports: [CommonModule, PoButtonModule, PoDynamicModule],
   templateUrl: './dyf-form.component.html',
-  styles: []
+  styles: [],
 })
 export class DyfFormComponent implements OnInit {
   @Input({ required: true }) table!: DyfTable;
@@ -31,18 +31,7 @@ export class DyfFormComponent implements OnInit {
   constructor(private builder: DyfFormBuilderService) {}
 
   ngOnInit(): void {
-    const fields = this.builder.getFormFields(this.table);
-    this.poFields = fields.map(f => ({
-      property: f.property,
-      label: f.label,
-      type: f.type as any,
-      required: f.required,
-      gridColumns: f.gridColumns,
-      placeholder: f.placeholder,
-      options: f.options,
-      mask: f.mask,
-      maxLength: f.maxLength,
-    }));
+    this.poFields = this.builder.buildFormFields(this.table);
     this.formValue = { ...this.value };
   }
 
@@ -54,4 +43,3 @@ export class DyfFormComponent implements OnInit {
     this.cancel.emit();
   }
 }
-
