@@ -3,17 +3,18 @@ import { PoButtonModule, PoToolbarModule } from '@po-ui/ng-components';
 import { DyfFormComponent, DyfGridComponent, DyfDetailComponent, DyfTable } from 'dynaform';
 
 const SAMPLE_TABLE: DyfTable = {
-  id: 'customers',
+  tableName: 'customers',
+  revision: 1,
   label: 'Clientes',
   endpoint: '/api/customers',
   fields: [
-    { property: 'id', label: 'ID', type: 'number', order: 1, visibleOnForm: false, visibleOnDetail: true, visibleOnGrid: true, gridColumns: 2 },
-    { property: 'name', label: 'Nome', type: 'text', order: 2, required: true, gridColumns: 6 },
-    { property: 'email', label: 'E-mail', type: 'email', order: 3, required: true, gridColumns: 6 },
-    { property: 'phone', label: 'Telefone', type: 'phone', order: 4, gridColumns: 4 },
-    { property: 'active', label: 'Ativo', type: 'boolean', order: 5, gridColumns: 2 },
-    { property: 'createdAt', label: 'Data de Cadastro', type: 'date', order: 6, visibleOnForm: false, gridColumns: 4 },
-  ]
+    { fieldName: 'id',        property: 'id',        label: 'ID',               type: 'number',  order: 1, key: true,  visibleOnForm: false, gridColumns: 2 },
+    { fieldName: 'name',      property: 'name',      label: 'Nome',             type: 'string',  order: 2, required: true, gridColumns: 6 },
+    { fieldName: 'email',     property: 'email',     label: 'E-mail',           type: 'string',  order: 3, required: true, gridColumns: 6 },
+    { fieldName: 'phone',     property: 'phone',     label: 'Telefone',         type: 'string',  order: 4, mask: '(99) 99999-9999', gridColumns: 4 },
+    { fieldName: 'active',    property: 'active',    label: 'Ativo',            type: 'boolean', order: 5, gridColumns: 2 },
+    { fieldName: 'createdAt', property: 'createdAt', label: 'Data de Cadastro', type: 'date',    order: 6, visibleOnForm: false, gridColumns: 4 },
+  ],
 };
 
 @Component({
