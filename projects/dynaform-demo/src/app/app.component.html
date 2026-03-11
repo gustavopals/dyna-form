@@ -1,45 +1,18 @@
-<po-toolbar p-title="DynaForm Demo"></po-toolbar>
+<po-toolbar p-title="DynaForm Demo">
+  <ng-template poToolbarContent>
+    <po-button
+      p-label="Demo"
+      p-kind="tertiary"
+      p-icon="po-icon-home"
+      p-router-link="/">
+    </po-button>
+    <po-button
+      p-label="Builder"
+      p-kind="tertiary"
+      p-icon="po-icon-edit"
+      p-router-link="/builder">
+    </po-button>
+  </ng-template>
+</po-toolbar>
 
-<div class="po-wrapper">
-  <div class="po-p-4">
-
-    @if (view === 'grid') {
-      <div class="po-mb-3 po-d-flex po-row po-justify-content-between po-align-items-center">
-        <h2 class="po-title">{{ table.label }}</h2>
-        <po-button p-label="Novo" p-kind="primary" p-icon="po-icon-plus" (p-click)="newRecord()"></po-button>
-      </div>
-      <dyf-grid
-        [table]="table"
-        [items]="items"
-        (view)="onViewDetail($event)"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)">
-      </dyf-grid>
-    }
-
-    @if (view === 'form') {
-      <div class="po-mb-3">
-        <po-button p-label="Voltar" p-kind="tertiary" p-icon="po-icon-arrow-left" (p-click)="back()"></po-button>
-        <h2 class="po-title po-mt-2">{{ selectedItem?.id ? 'Editar' : 'Novo' }} registro</h2>
-      </div>
-      <dyf-form
-        [table]="table"
-        [value]="selectedItem"
-        (save)="onSave($event)"
-        (cancel)="back()">
-      </dyf-form>
-    }
-
-    @if (view === 'detail') {
-      <div class="po-mb-3">
-        <po-button p-label="Voltar" p-kind="tertiary" p-icon="po-icon-arrow-left" (p-click)="back()"></po-button>
-        <h2 class="po-title po-mt-2">Detalhes</h2>
-      </div>
-      <dyf-detail
-        [table]="table"
-        [value]="selectedItem">
-      </dyf-detail>
-    }
-
-  </div>
-</div>
+<router-outlet></router-outlet>
