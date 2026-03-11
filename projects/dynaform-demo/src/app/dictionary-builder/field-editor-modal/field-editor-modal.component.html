@@ -1,0 +1,175 @@
+<po-modal
+  #modal
+  p-title="Campo"
+  [p-primary-action]="primaryAction"
+  [p-secondary-action]="secondaryAction">
+
+  <!-- Erros de validação -->
+  @if (validationErrors.length > 0) {
+    <div class="po-mb-3" style="color: #c64840; background: #fde8e7; border-radius: 4px; padding: 8px 12px;">
+      <strong>Erros de validação:</strong>
+      <ul style="margin: 4px 0 0 16px; padding: 0;">
+        @for (err of validationErrors; track err) {
+          <li>{{ err }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  <div class="po-row">
+
+    <!-- IDENTIDADE -->
+    <po-divider p-label="Identidade" class="po-xl-12 po-lg-12"></po-divider>
+
+    <po-input
+      class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+      name="fieldName"
+      p-label="fieldName *"
+      p-placeholder="ex: customer_name"
+      [(ngModel)]="field.fieldName">
+    </po-input>
+
+    <po-input
+      class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+      name="property"
+      p-label="property *"
+      p-placeholder="ex: customer_name"
+      [(ngModel)]="field.property">
+    </po-input>
+
+    <po-input
+      class="po-xl-8 po-lg-8 po-md-8 po-sm-12"
+      name="label"
+      p-label="Label *"
+      p-placeholder="ex: Nome do Cliente"
+      [(ngModel)]="field.label">
+    </po-input>
+
+    <po-select
+      class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+      name="type"
+      p-label="Tipo *"
+      [p-options]="typeOptions"
+      [(ngModel)]="field.type">
+    </po-select>
+
+    <po-switch
+      class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+      name="key"
+      p-label="Chave primária"
+      [p-disabled]="keyToggleDisabled"
+      [(ngModel)]="field.key">
+    </po-switch>
+
+    <!-- LAYOUT -->
+    <po-divider p-label="Layout" class="po-xl-12 po-lg-12"></po-divider>
+
+    <po-number
+      class="po-xl-3 po-lg-3 po-md-3 po-sm-6"
+      name="order"
+      p-label="Ordem"
+      [(ngModel)]="field.order">
+    </po-number>
+
+    <po-number
+      class="po-xl-3 po-lg-3 po-md-3 po-sm-6"
+      name="gridColumns"
+      p-label="Grid Columns (1–12)"
+      p-min="1"
+      p-max="12"
+      [(ngModel)]="field.gridColumns">
+    </po-number>
+
+    @if (folderOptions.length > 0) {
+      <po-select
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12"
+        name="folderId"
+        p-label="Folder"
+        [p-options]="folderOptions"
+        [(ngModel)]="field.folderId">
+      </po-select>
+    }
+
+    <!-- VISIBILIDADE -->
+    <po-divider p-label="Visibilidade" class="po-xl-12 po-lg-12"></po-divider>
+
+    <po-switch
+      class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+      name="visibleOnForm"
+      p-label="Visível no Form"
+      [(ngModel)]="field.visibleOnForm">
+    </po-switch>
+
+    <po-switch
+      class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+      name="visibleOnGrid"
+      p-label="Visível no Grid"
+      [(ngModel)]="field.visibleOnGrid">
+    </po-switch>
+
+    <po-switch
+      class="po-xl-4 po-lg-4 po-md-4 po-sm-12"
+      name="visibleOnDetail"
+      p-label="Visível no Detail"
+      [(ngModel)]="field.visibleOnDetail">
+    </po-switch>
+
+    <!-- COMPORTAMENTO -->
+    <po-divider p-label="Comportamento" class="po-xl-12 po-lg-12"></po-divider>
+
+    <po-switch class="po-xl-3 po-lg-3 po-md-3 po-sm-6" name="required" p-label="Obrigatório" [(ngModel)]="field.required"></po-switch>
+    <po-switch class="po-xl-3 po-lg-3 po-md-3 po-sm-6" name="disabled" p-label="Desabilitado" [(ngModel)]="field.disabled"></po-switch>
+    <po-switch class="po-xl-3 po-lg-3 po-md-3 po-sm-6" name="readonly" p-label="Somente Leitura" [(ngModel)]="field.readonly"></po-switch>
+    <po-switch class="po-xl-3 po-lg-3 po-md-3 po-sm-6" name="clean" p-label="Com Limpar" [(ngModel)]="field.clean"></po-switch>
+
+    <po-input
+      class="po-xl-12 po-lg-12"
+      name="placeholder"
+      p-label="Placeholder"
+      [(ngModel)]="field.placeholder">
+    </po-input>
+
+    <!-- ESPECÍFICO POR TIPO: STRING -->
+    @if (isString) {
+      <po-divider p-label="String" class="po-xl-12 po-lg-12"></po-divider>
+
+      <po-input class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="mask" p-label="Máscara" p-placeholder="(99) 99999-9999" [(ngModel)]="field.mask"></po-input>
+      <po-number class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="maxLength" p-label="Máx. Caracteres" [(ngModel)]="field.maxLength"></po-number>
+      <po-number class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="minLength" p-label="Mín. Caracteres" [(ngModel)]="field.minLength"></po-number>
+      <po-number class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="rows" p-label="Linhas (>1 = textarea)" [(ngModel)]="field.rows"></po-number>
+      <po-switch class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="secret" p-label="Campo Senha" [(ngModel)]="field.secret"></po-switch>
+    }
+
+    <!-- ESPECÍFICO POR TIPO: NUMÉRICO -->
+    @if (isNumeric) {
+      <po-divider p-label="Numérico" class="po-xl-12 po-lg-12"></po-divider>
+
+      <po-number class="po-xl-6 po-lg-6 po-md-6 po-sm-12" name="decimalsLength" p-label="Casas Decimais" [(ngModel)]="field.decimalsLength"></po-number>
+      <po-input class="po-xl-6 po-lg-6 po-md-6 po-sm-12" name="format" p-label="Formato" [(ngModel)]="field.format"></po-input>
+    }
+
+    <!-- OPÇÕES -->
+    <po-divider p-label="Opções (select/radio)" class="po-xl-12 po-lg-12"></po-divider>
+
+    @for (opt of field.options; track $index) {
+      <po-input class="po-xl-5 po-lg-5 po-md-5 po-sm-5" [name]="'opt_label_' + $index" p-label="Label" [(ngModel)]="opt.label"></po-input>
+      <po-input class="po-xl-5 po-lg-5 po-md-5 po-sm-5" [name]="'opt_value_' + $index" p-label="Value" [(ngModel)]="opt.value"></po-input>
+      <div class="po-xl-2 po-lg-2 po-md-2 po-sm-2 po-d-flex po-align-items-end po-pb-1">
+        <po-button p-icon="po-icon-delete" p-kind="danger" (p-click)="removeOption($index)"></po-button>
+      </div>
+    }
+
+    <div class="po-xl-12 po-lg-12">
+      <po-button p-label="Adicionar Opção" p-icon="po-icon-plus" p-kind="secondary" (p-click)="addOption()"></po-button>
+    </div>
+
+    <po-switch class="po-xl-4 po-lg-4 po-md-4 po-sm-12" name="optionsMulti" p-label="Multi-seleção" [(ngModel)]="field.optionsMulti"></po-switch>
+
+    <!-- AVANÇADO -->
+    <po-divider p-label="Avançado" class="po-xl-12 po-lg-12"></po-divider>
+
+    <po-input class="po-xl-6 po-lg-6 po-md-6 po-sm-12" name="optionsService" p-label="Options Service URL" [(ngModel)]="field.optionsService"></po-input>
+    <po-input class="po-xl-6 po-lg-6 po-md-6 po-sm-12" name="searchService" p-label="Search Service URL" [(ngModel)]="field.searchService"></po-input>
+
+  </div>
+</po-modal>
