@@ -218,11 +218,6 @@ export class DictionaryBuilderComponent {
   save(): void {
     if (!this.canSave) return;
 
-    if (!this.hasKeyField) {
-      this.notification.error({ message: 'É necessário pelo menos um campo com chave primária (key).' });
-      return;
-    }
-
     this.builderService.save(this.currentTable);
     this.notification.success({ message: `Dicionário "${this.tableForm.tableName}" salvo com sucesso!` });
   }
