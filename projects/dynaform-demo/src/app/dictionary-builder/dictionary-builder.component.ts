@@ -45,8 +45,9 @@ export class DictionaryBuilderComponent {
   showFolders = false;
 
   // --- Folder modal state ---
-  editingFolder!: Partial<DyfFolder>;
+  editingFolder: Partial<DyfFolder> = {};
   editingFolderOriginalId: string | null = null;
+  private editingFieldOriginalName: string | null = null;
 
   readonly folderPrimaryAction: PoModalAction = {
     label: 'Salvar',
@@ -111,7 +112,8 @@ export class DictionaryBuilderComponent {
       SNAKE.test(this.tableForm.tableName) &&
       this.tableForm.revision >= 1 &&
       !!this.tableForm.label &&
-      this.fields.length > 0
+      this.fields.length > 0 &&
+      this.hasKeyField
     );
   }
 
@@ -121,22 +123,26 @@ export class DictionaryBuilderComponent {
 
   // --- Fields ---
   openAddField(): void {
+    this.editingFieldOriginalName = null;
     const existing = this.fields.map(f => f.fieldName);
     this.fieldModal.open(undefined, existing, this.folderSelectOptions, this.hasKeyField);
   }
 
   openEditField(field: DyfField): void {
+    this.editingFieldOriginalName = field.fieldName;
     const existing = this.fields.filter(f => f.fieldName !== field.fieldName).map(f => f.fieldName);
     this.fieldModal.open({ ...field }, existing, this.folderSelectOptions, this.hasKeyField && !field.key);
   }
 
   onFieldSaved(field: DyfField): void {
-    const idx = this.fields.findIndex(f => f.fieldName === field.fieldName);
+    const lookupName = this.editingFieldOriginalName ?? field.fieldName;
+    const idx = this.fields.findIndex(f => f.fieldName === lookupName);
     if (idx >= 0) {
       this.fields = this.fields.map((f, i) => (i === idx ? field : f));
     } else {
       this.fields = [...this.fields, field];
     }
+    this.editingFieldOriginalName = null;
     // Only one key field allowed
     if (field.key) {
       this.fields = this.fields.map(f => f.fieldName === field.fieldName ? f : { ...f, key: undefined });
@@ -161,12 +167,24 @@ export class DictionaryBuilderComponent {
   }
 
   saveFolder(): void {
+    const SNAKE_CASE = /^[a-z][a-z0-9_]*$/;
     if (!this.editingFolder.folderId?.trim() || !this.editingFolder.label?.trim()) {
       this.notification.warning({ message: 'ID e Label do folder são obrigatórios.' });
       return;
     }
+    if (!SNAKE_CASE.test(this.editingFolder.folderId!)) {
+      this.notification.warning({ message: 'folderId deve ser snake_case (ex: dados_pessoais).' });
+      return;
+    }
 
     if (this.editingFolderOriginalId) {
+      const collides = this.folders.some(
+        f => f.folderId === this.editingFolder.folderId && f.folderId !== this.editingFolderOriginalId
+      );
+      if (collides) {
+        this.notification.warning({ message: `folderId "${this.editingFolder.folderId}" já existe.` });
+        return;
+      }
       this.folders = this.folders.map(f =>
         f.folderId === this.editingFolderOriginalId
           ? { folderId: this.editingFolder.folderId!, label: this.editingFolder.label!, order: this.editingFolder.order }
