@@ -8,7 +8,9 @@
 
 ## Objetivo
 
-Criar uma landing page estática (`projects/dynaform-demo/src/landing/index.html`) que apresente a biblioteca `@gustavopals/dynaform` para desenvolvedores Angular, com links para o Demo ao vivo e para o Dictionary Builder.
+Criar uma landing page estática que apresente a biblioteca `@gustavopals/dynaform` para desenvolvedores Angular, com links para o Demo ao vivo e para o Dictionary Builder.
+
+> **Dependência:** a landing usa `npm install @gustavopals/dynaform` no Hero. O pacote ainda não existe no npm — esta página assume que o item 7 do roadmap (npm publish) já foi concluído antes do deploy público. Durante desenvolvimento, o comando é apenas visual.
 
 ---
 
@@ -17,10 +19,11 @@ Criar uma landing page estática (`projects/dynaform-demo/src/landing/index.html
 | Decisão | Escolha |
 |---|---|
 | Tecnologia | HTML/CSS/JS standalone — sem framework, sem dependências externas |
-| Localização | `projects/dynaform-demo/src/landing/index.html` |
-| Estilo | Dark navy + vermelho/coral (C — Bold/Impactante) |
-| Layout | Hero centralizado + 3 feature cards + código (A) |
+| Localização | `projects/dynaform-demo/public/landing/index.html` (pasta `public/` é servida como assets estáticos pelo `ng serve`) |
+| Estilo | Dark navy + vermelho/coral |
+| Layout | Hero centralizado + 3 feature cards + código |
 | Idioma | Português (consistente com o restante do projeto) |
+| Viewport mínimo | 1024px (desktop only; responsividade móvel fora do escopo) |
 
 ---
 
@@ -62,9 +65,26 @@ Criar uma landing page estática (`projects/dynaform-demo/src/landing/index.html
 - Título: "Começar leva 5 minutos"
 - Subtítulo: "Instale, defina o dicionário, use os componentes"
 - Grid 2 colunas lado a lado:
-  - Bloco TypeScript: definição de `DyfTable` com campos `id`, `nome`, `ativo`
-  - Bloco HTML: uso dos 3 componentes `<dyf-grid>`, `<dyf-form>`, `<dyf-detail>`
-- Syntax highlighting manual via spans com cores
+  - **Bloco TypeScript** — dicionário correto, respeitando a interface `DyfTable` / `DyfField`:
+    ```typescript
+    const TABLE: DyfTable = {
+      tableName: 'clientes',
+      revision: 1,
+      label: 'Clientes',
+      fields: [
+        { fieldName: 'id',   property: 'id',   label: 'ID',   type: 'number', key: true },
+        { fieldName: 'nome', property: 'nome', label: 'Nome', type: 'string', required: true, gridColumns: 8 },
+        { fieldName: 'ativo',property: 'ativo',label: 'Ativo',type: 'boolean', gridColumns: 4 },
+      ],
+    };
+    ```
+  - **Bloco HTML** — uso dos 3 componentes `<dyf-grid>`, `<dyf-form>`, `<dyf-detail>` com seus inputs/outputs corretos
+- Syntax highlighting manual via `<span>` com as cores da paleta:
+  - Keywords (`const`, `true`) → `--purple` (`#a78bfa`)
+  - Strings (`'clientes'`, `'string'`) → `--green` (`#34d399`)
+  - Types (`DyfTable`) → `--blue` (`#60a5fa`)
+  - Tag names no HTML (`dyf-grid`, `dyf-form`) → `--accent` (`#e94560`)
+  - Comentários → `--text-dim` (`#94a3b8`)
 
 ### ⑥ CTA Builder
 - Card com gradiente sutil (vermelho escuro → navy)
@@ -75,7 +95,10 @@ Criar uma landing page estática (`projects/dynaform-demo/src/landing/index.html
 
 ### ⑦ Footer
 - Logo pequeno + "DYNAFORM" + "MIT License"
-- Links: npm, GitHub, PO-UI
+- Links:
+  - npm → `https://www.npmjs.com/package/@gustavopals/dynaform`
+  - GitHub → `https://github.com/gustavopals/dyna-form`
+  - PO-UI → `https://po-ui.io`
 - "by Gustavo Pals"
 
 ---
@@ -114,14 +137,29 @@ Criar uma landing page estática (`projects/dynaform-demo/src/landing/index.html
 
 - **Copiar install command:** botão "copiar" usa `navigator.clipboard.writeText()` com feedback visual ("✓ copiado!")
 - **Navbar scroll:** `scroll` listener adiciona classe `scrolled` ao nav, aumentando opacidade do backdrop
-- **Links:** Demo → `../index.html` (raiz da app), Builder → `../index.html#/builder`, GitHub → URL externa
+- **Links internos** (a app usa `PathLocationStrategy` — sem hash):
+  - Demo → `../` (raiz da app Angular)
+  - Builder → `../builder`
+  - GitHub → `https://github.com/gustavopals/dyna-form` (nova aba)
+
+## `<head>` da página
+
+```html
+<title>DynaForm — Auto-generates CRUD interfaces from JSON · Angular 19 · PO-UI</title>
+<meta name="description" content="Biblioteca Angular que gera formulário, grid e detalhe automaticamente a partir de um dicionário JSON de campos. Usa PO-UI v19.">
+<meta property="og:title" content="DynaForm — CRUD interfaces from JSON">
+<meta property="og:description" content="Auto-generates dyf-form, dyf-grid and dyf-detail from a DyfTable dictionary. Angular 19 + PO-UI.">
+<meta property="og:url" content="https://github.com/gustavopals/dyna-form">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
 
 ---
 
 ## Fora do Escopo
 
 - Internacionalização (EN)
-- Versão mobile responsiva (fica para futuro; foco é desktop)
+- Versão mobile responsiva (foco é desktop ≥ 1024px)
 - Dark/light mode toggle
 - Animações de entrada (scroll animations)
-- Build pipeline para o HTML (serve como arquivo estático)
+- Build pipeline para o HTML (serve como arquivo estático via pasta `public/`)
