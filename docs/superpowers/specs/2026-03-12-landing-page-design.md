@@ -149,9 +149,9 @@ Criar uma landing page estática que apresente a biblioteca `@gustavopals/dynafo
 <meta name="description" content="Biblioteca Angular que gera formulário, grid e detalhe automaticamente a partir de um dicionário JSON de campos. Usa PO-UI v19.">
 <meta property="og:title" content="DynaForm — CRUD interfaces from JSON">
 <meta property="og:description" content="Auto-generates dyf-form, dyf-grid and dyf-detail from a DyfTable dictionary. Angular 19 + PO-UI.">
-<meta property="og:url" content="https://github.com/gustavopals/dyna-form">
+<meta property="og:url" content="https://gustavopals.github.io/dyna-form/landing/"><!-- canonical URL do deploy; ajustar se domínio mudar -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1024"><!-- página desktop-only (≥ 1024px), sem escala em mobile -->
 ```
 
 ---
