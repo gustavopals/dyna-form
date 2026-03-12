@@ -349,6 +349,128 @@
       padding: 1px 5px;
       border-radius: 3px;
     }
+
+    /* ── Quick Start ── */
+    .qs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background: rgba(255,255,255,.04);
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-lang {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    }
+
+    .code-dots { display: flex; gap: 5px; }
+    .code-dots span {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+    }
+
+    .code-body {
+      padding: 18px 20px;
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.75;
+      color: var(--text-dim);
+      overflow-x: auto;
+    }
+
+    /* syntax highlight tokens */
+    .tk  { color: var(--purple); } /* keyword */
+    .ts  { color: var(--green);  } /* string  */
+    .tt  { color: var(--blue);   } /* type    */
+    .tp  { color: var(--accent); } /* tag/prop */
+    .tc  { color: var(--text-dim); opacity: .6; } /* comment */
+    .tn  { color: #f97316; }       /* number  */
+
+    /* ── CTA Builder ── */
+    .cta-builder { text-align: center; }
+
+    .cta-box {
+      display: inline-block;
+      max-width: 640px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(233,69,96,.10) 0%, rgba(15,52,96,.20) 100%);
+      border: 1px solid rgba(233,69,96,.25);
+      border-radius: 20px;
+      padding: 56px 48px;
+    }
+
+    .cta-box h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .cta-box p {
+      color: var(--text-dim);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .cta-box p code {
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-logo-hex {
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    }
+    .footer-logo span { font-weight: 700; font-size: 12px; letter-spacing: 1px; color: var(--text-muted); }
+
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: var(--text); }
   </style>
 </head>
 <body>
@@ -440,6 +562,110 @@
       </div>
     </div>
   </section>
+
+  <!-- ⑤ QUICK START -->
+  <section id="quick-start">
+    <div class="section-header">
+      <span class="section-label">Exemplo</span>
+      <h2>Começar leva 5 minutos</h2>
+      <p>Instale, defina o dicionário, use os componentes</p>
+    </div>
+    <div class="qs-grid">
+
+      <!-- TypeScript -->
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">TypeScript — dicionário</span>
+          <div class="code-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="code-body">
+<span class="tk">const</span> TABLE: <span class="tt">DyfTable</span> = {<br>
+&nbsp;&nbsp;tableName: <span class="ts">'clientes'</span>,<br>
+&nbsp;&nbsp;revision: <span class="tn">1</span>,<br>
+&nbsp;&nbsp;label: <span class="ts">'Clientes'</span>,<br>
+&nbsp;&nbsp;fields: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="ts">'id'</span>, property: <span class="ts">'id'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="ts">'ID'</span>, type: <span class="ts">'number'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key: <span class="tk">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="ts">'nome'</span>, property: <span class="ts">'nome'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="ts">'Nome'</span>, type: <span class="ts">'string'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required: <span class="tk">true</span>, gridColumns: <span class="tn">8</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="ts">'ativo'</span>, property: <span class="ts">'ativo'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="ts">'Ativo'</span>, type: <span class="ts">'boolean'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gridColumns: <span class="tn">4</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;],<br>
+};<br>
+        </div>
+      </div>
+
+      <!-- HTML -->
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-lang">HTML — template</span>
+          <div class="code-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="code-body">
+<span class="tc">&lt;!-- Grid de listagem --&gt;</span><br>
+&lt;<span class="tp">dyf-grid</span><br>
+&nbsp;&nbsp;[table]=<span class="ts">"TABLE"</span><br>
+&nbsp;&nbsp;[items]=<span class="ts">"items"</span><br>
+&nbsp;&nbsp;(edit)=<span class="ts">"onEdit($event)"</span><br>
+&nbsp;&nbsp;(delete)=<span class="ts">"onDelete($event)"</span>&gt;<br>
+&lt;/<span class="tp">dyf-grid</span>&gt;<br>
+<br>
+<span class="tc">&lt;!-- Formulário de edição --&gt;</span><br>
+&lt;<span class="tp">dyf-form</span><br>
+&nbsp;&nbsp;[table]=<span class="ts">"TABLE"</span><br>
+&nbsp;&nbsp;[value]=<span class="ts">"item"</span><br>
+&nbsp;&nbsp;(save)=<span class="ts">"onSave($event)"</span><br>
+&nbsp;&nbsp;(cancel)=<span class="ts">"back()"</span>&gt;<br>
+&lt;/<span class="tp">dyf-form</span>&gt;<br>
+<br>
+<span class="tc">&lt;!-- Detalhe readonly --&gt;</span><br>
+&lt;<span class="tp">dyf-detail</span><br>
+&nbsp;&nbsp;[table]=<span class="ts">"TABLE"</span><br>
+&nbsp;&nbsp;[value]=<span class="ts">"item"</span>&gt;<br>
+&lt;/<span class="tp">dyf-detail</span>&gt;<br>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ⑥ CTA BUILDER -->
+  <section class="cta-builder" id="builder-cta">
+    <div class="cta-box">
+      <div class="hero-badge" style="margin-bottom: 20px;">Novo ✦ Ferramenta visual</div>
+      <h2>Monte seus campos<br>sem escrever JSON</h2>
+      <p>O Dictionary Builder deixa você criar, editar e reorganizar campos visualmente — e exporta o <code>DyfTable</code> pronto para colar no seu projeto.</p>
+      <div class="cta-btns">
+        <a href="../builder" class="btn-primary">Abrir Builder →</a>
+        <a href="../" class="btn-outline">Ver Demo primeiro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <div class="footer-logo-hex"></div>
+      <span>DYNAFORM</span>
+      <span style="margin-left:8px; color: var(--border);">·</span>
+      <span style="margin-left:8px;">MIT License</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.npmjs.com/package/@gustavopals/dynaform" target="_blank" rel="noopener">npm</a>
+      <a href="https://github.com/gustavopals/dyna-form" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://po-ui.io" target="_blank" rel="noopener">PO-UI</a>
+    </div>
+    <span>by Gustavo Pals</span>
+  </footer>
 
 </body>
 </html>
