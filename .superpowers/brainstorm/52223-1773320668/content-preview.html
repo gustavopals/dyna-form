@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e2e8f0; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #e94560; margin-bottom: 8px; }
+  .section-box { border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; }
+  .section-header { background: rgba(233,69,96,.08); padding: 8px 16px; font-size: 11px; color: #e94560; font-weight: 700; letter-spacing: 1px; border-bottom: 1px solid rgba(233,69,96,.2); }
+
+  /* ── NAV ── */
+  nav { background: rgba(10,10,15,.95); border-bottom: 1px solid rgba(255,255,255,.06); padding: 0 40px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 8px; }
+  .logo-hex { width: 28px; height: 28px; background: linear-gradient(135deg,#e94560,#c02040); clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%); }
+  .logo-text { font-weight: 800; font-size: 15px; letter-spacing: 2px; color: #fff; }
+  .nav-links { display: flex; align-items: center; gap: 24px; font-size: 13px; color: #94a3b8; }
+  .nav-links a { cursor: pointer; }
+  .nav-links a:hover { color: #fff; }
+  .nav-btn { background: #e94560; color: #fff; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+  /* ── HERO ── */
+  .hero { padding: 64px 40px 48px; text-align: center; position: relative; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(233,69,96,.12); border: 1px solid rgba(233,69,96,.35); color: #e94560; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: 48px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+  .hero h1 span { background: linear-gradient(90deg,#e94560,#f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: #64748b; font-size: 16px; max-width: 520px; margin: 0 auto 28px; line-height: 1.6; }
+  .hero-ctas { display: flex; gap: 12px; justify-content: center; }
+  .btn-primary { background: #e94560; color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .btn-outline { border: 1px solid rgba(255,255,255,.15); color: #94a3b8; padding: 12px 24px; border-radius: 8px; font-size: 14px; cursor: pointer; }
+  .hero-install { margin-top: 24px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); display: inline-flex; align-items: center; gap: 12px; padding: 10px 20px; border-radius: 8px; font-family: monospace; font-size: 13px; }
+  .hero-install span { color: #e94560; }
+  .hero-install kbd { color: #94a3b8; font-size: 10px; background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 3px; cursor: pointer; }
+
+  /* ── COMPONENTES ── */
+  .components { padding: 48px 40px; }
+  .components h2 { font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .components .sub { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 32px; }
+  .comp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .comp-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 24px; transition: border-color .2s; }
+  .comp-card:hover { border-color: rgba(233,69,96,.4); }
+  .comp-icon { font-size: 28px; margin-bottom: 12px; }
+  .comp-tag { font-family: monospace; font-size: 13px; font-weight: 700; color: #e94560; margin-bottom: 6px; }
+  .comp-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .comp-desc { color: #64748b; font-size: 13px; line-height: 1.5; }
+
+  /* ── COMO FUNCIONA ── */
+  .how { padding: 48px 40px; background: rgba(233,69,96,.03); border-top: 1px solid rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.05); }
+  .how h2 { font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .how .sub { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 32px; }
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; }
+  .steps::after { content:''; position:absolute; top:28px; left:16.5%; right:16.5%; height:1px; background: linear-gradient(90deg,transparent,rgba(233,69,96,.4),transparent); }
+  .step { text-align: center; padding: 0 16px; }
+  .step-num { width: 56px; height: 56px; background: rgba(233,69,96,.1); border: 2px solid rgba(233,69,96,.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: #e94560; margin: 0 auto 16px; }
+  .step h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .step p { color: #64748b; font-size: 13px; line-height: 1.5; }
+
+  /* ── QUICK START ── */
+  .quickstart { padding: 48px 40px; }
+  .quickstart h2 { font-size: 28px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .quickstart .sub { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 32px; }
+  .qs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .code-block { background: #080811; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; }
+  .code-header { background: rgba(255,255,255,.04); padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .code-lang { font-size: 11px; color: #64748b; font-family: monospace; }
+  .code-body { padding: 16px; font-family: monospace; font-size: 12px; line-height: 1.7; color: #94a3b8; }
+  .k { color: #a78bfa; }
+  .s { color: #34d399; }
+  .t { color: #60a5fa; }
+  .p { color: #e94560; }
+  .c { color: #475569; }
+
+  /* ── CTA BUILDER ── */
+  .cta-builder { padding: 48px 40px; text-align: center; }
+  .cta-box { background: linear-gradient(135deg, rgba(233,69,96,.1), rgba(15,52,96,.2)); border: 1px solid rgba(233,69,96,.25); border-radius: 16px; padding: 48px 40px; }
+  .cta-box h2 { font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+  .cta-box p { color: #94a3b8; font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; }
+
+  /* ── FOOTER ── */
+  footer { background: rgba(255,255,255,.02); border-top: 1px solid rgba(255,255,255,.06); padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #475569; }
+  footer a { color: #64748b; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- NAV -->
+  <div class="section-box">
+    <div class="section-header">① NAVBAR</div>
+    <nav>
+      <div class="logo">
+        <div class="logo-hex"></div>
+        <span class="logo-text">DYNAFORM</span>
+      </div>
+      <div class="nav-links">
+        <a>Docs</a>
+        <a>Demo</a>
+        <a>Builder</a>
+        <a href="https://github.com/gustavopals/dyna-form" style="color:#94a3b8;">GitHub ↗</a>
+        <div class="nav-btn">npm install</div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <div class="section-box">
+    <div class="section-header">② HERO</div>
+    <div class="hero">
+      <div class="hero-badge">⬡ Angular 19 · PO-UI · Open Source</div>
+      <h1>Gere interfaces <span>CRUD</span><br>a partir de um JSON</h1>
+      <p>Defina seus campos uma vez, reutilize em formulário, grid e detalhe — sem repetição, sem boilerplate.</p>
+      <div class="hero-ctas">
+        <div class="btn-primary">▶ Ver Demo ao vivo</div>
+        <div class="btn-outline">Montar campos →</div>
+      </div>
+      <div>
+        <div class="hero-install">
+          <span>$</span> npm install @gustavopals/dynaform
+          <kbd>copiar</kbd>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTES -->
+  <div class="section-box">
+    <div class="section-header">③ 3 COMPONENTES</div>
+    <div class="components">
+      <div class="label">O que você ganha</div>
+      <h2>Três componentes, zero repetição</h2>
+      <p class="sub">Um único dicionário de campos alimenta tudo</p>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="comp-icon">📋</div>
+          <div class="comp-tag">&lt;dyf-form&gt;</div>
+          <div class="comp-title">Formulário CRUD</div>
+          <div class="comp-desc">Cria e edita registros. Campos com validação, máscara, select e agrupamento por abas.</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">📊</div>
+          <div class="comp-tag">&lt;dyf-grid&gt;</div>
+          <div class="comp-title">Grid de listagem</div>
+          <div class="comp-desc">Tabela com colunas automáticas, paginação, busca e ações de editar/excluir/detalhe.</div>
+        </div>
+        <div class="comp-card">
+          <div class="comp-icon">🔍</div>
+          <div class="comp-tag">&lt;dyf-detail&gt;</div>
+          <div class="comp-title">Detalhe readonly</div>
+          <div class="comp-desc">Exibe um registro formatado para leitura, com labels e valores dos campos configurados.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="section-box">
+    <div class="section-header">④ COMO FUNCIONA</div>
+    <div class="how">
+      <div class="label">Fluxo</div>
+      <h2>Três passos para ter um CRUD</h2>
+      <p class="sub">Do JSON ao produto final em minutos</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Defina o dicionário</h3>
+          <p>Crie um objeto <code style="color:#e94560;font-size:11px;">DyfTable</code> com os campos, tipos e opções. Use o Builder ou escreva na mão.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Use os componentes</h3>
+          <p>Passe o <code style="color:#e94560;font-size:11px;">DyfTable</code> para <code style="color:#e94560;font-size:11px;">&lt;dyf-form&gt;</code>, <code style="color:#e94560;font-size:11px;">&lt;dyf-grid&gt;</code> ou <code style="color:#e94560;font-size:11px;">&lt;dyf-detail&gt;</code> via @Input.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>CRUD pronto</h3>
+          <p>DynaForm gera formulários, colunas e layouts automaticamente. Nada de código repetitivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK START -->
+  <div class="section-box">
+    <div class="section-header">⑤ QUICK START (código de exemplo)</div>
+    <div class="quickstart">
+      <div class="label">Exemplo</div>
+      <h2>Começar leva 5 minutos</h2>
+      <p class="sub">Instale, defina o dicionário, use os componentes</p>
+      <div class="qs-grid">
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">TypeScript — dicionário</span></div>
+          <div class="code-body">
+<span class="k">const</span> TABLE: <span class="t">DyfTable</span> = {<br>
+&nbsp;&nbsp;tableName: <span class="s">'clientes'</span>,<br>
+&nbsp;&nbsp;label: <span class="s">'Clientes'</span>,<br>
+&nbsp;&nbsp;fields: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="s">'id'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="s">'ID'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="s">'number'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key: <span class="k">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="s">'nome'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="s">'Nome'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="s">'string'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required: <span class="k">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gridColumns: <span class="p">8</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fieldName: <span class="s">'ativo'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: <span class="s">'Ativo'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="s">'boolean'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gridColumns: <span class="p">4</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;],<br>
+};<br>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">HTML — template</span></div>
+          <div class="code-body">
+<span class="c">&lt;!-- Grid de listagem --&gt;</span><br>
+&lt;<span class="p">dyf-grid</span><br>
+&nbsp;&nbsp;[table]=<span class="s">"TABLE"</span><br>
+&nbsp;&nbsp;[items]=<span class="s">"items"</span><br>
+&nbsp;&nbsp;(edit)=<span class="s">"onEdit($event)"</span><br>
+&nbsp;&nbsp;(delete)=<span class="s">"onDelete($event)"</span>&gt;<br>
+&lt;/<span class="p">dyf-grid</span>&gt;<br>
+<br>
+<span class="c">&lt;!-- Formulário de edição --&gt;</span><br>
+&lt;<span class="p">dyf-form</span><br>
+&nbsp;&nbsp;[table]=<span class="s">"TABLE"</span><br>
+&nbsp;&nbsp;[value]=<span class="s">"item"</span><br>
+&nbsp;&nbsp;(save)=<span class="s">"onSave($event)"</span><br>
+&nbsp;&nbsp;(cancel)=<span class="s">"back()"</span>&gt;<br>
+&lt;/<span class="p">dyf-form</span>&gt;<br>
+<br>
+<span class="c">&lt;!-- Detalhe readonly --&gt;</span><br>
+&lt;<span class="p">dyf-detail</span><br>
+&nbsp;&nbsp;[table]=<span class="s">"TABLE"</span><br>
+&nbsp;&nbsp;[value]=<span class="s">"item"</span>&gt;<br>
+&lt;/<span class="p">dyf-detail</span>&gt;<br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BUILDER -->
+  <div class="section-box">
+    <div class="section-header">⑥ CTA BUILDER</div>
+    <div class="cta-builder">
+      <div class="cta-box">
+        <div class="hero-badge" style="margin-bottom:16px;">Novo ✦ Ferramenta visual</div>
+        <h2>Monte seus campos<br>sem escrever JSON</h2>
+        <p>O Dictionary Builder deixa você criar, editar e reorganizar campos visualmente — e exporta o <code style="color:#e94560;">DyfTable</code> pronto para colar no seu projeto.</p>
+        <div class="cta-btns">
+          <div class="btn-primary">Abrir Builder →</div>
+          <div class="btn-outline">Ver Demo primeiro</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="section-box">
+    <div class="section-header">⑦ FOOTER</div>
+    <footer>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="logo-hex" style="width:18px;height:18px;"></div>
+        <span style="font-weight:700;color:#64748b;">DYNAFORM</span>
+        <span>· MIT License</span>
+      </div>
+      <div style="display:flex;gap:20px;">
+        <a>npm</a>
+        <a>GitHub</a>
+        <a>PO-UI</a>
+      </div>
+      <span>by Gustavo Pals</span>
+    </footer>
+  </div>
+
+</div>
+
+</body>
+</html>

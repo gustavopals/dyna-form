@@ -1,0 +1,145 @@
+<h2>Qual estrutura de layout?</h2>
+<p class="subtitle">Como organizar as seções da landing page</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a2e;padding:16px;min-height:220px;font-size:9px;color:#94a3b8;">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:rgba(255,255,255,.05);border-radius:5px;margin-bottom:8px;">
+        <span style="color:#fff;font-weight:700;">⬡ DYNAFORM</span>
+        <div style="display:flex;gap:8px;color:#94a3b8;">
+          <span>Docs</span><span>Demo</span><span style="background:#e94560;color:#fff;padding:2px 7px;border-radius:3px;">npm install</span>
+        </div>
+      </div>
+      <!-- Hero: texto centralizado + CTA -->
+      <div style="text-align:center;padding:12px 0 10px;">
+        <div style="color:#fff;font-size:13px;font-weight:800;line-height:1.3;margin-bottom:4px;">Auto-gere interfaces<br><span style="color:#e94560;">CRUD</span> do JSON</div>
+        <div style="color:#64748b;margin-bottom:8px;font-size:8px;">3 componentes · PO-UI · Angular 19</div>
+        <div style="display:flex;gap:6px;justify-content:center;">
+          <div style="background:#e94560;color:#fff;padding:4px 10px;border-radius:4px;font-size:8px;font-weight:600;">Ver Demo</div>
+          <div style="border:1px solid #334155;color:#94a3b8;padding:4px 10px;border-radius:4px;font-size:8px;">Builder →</div>
+        </div>
+      </div>
+      <!-- 3 feature cards -->
+      <div style="display:flex;gap:5px;margin-bottom:8px;">
+        <div style="flex:1;background:#0f3460;border-radius:4px;padding:6px;text-align:center;">
+          <div style="color:#e94560;font-size:11px;">📋</div>
+          <div style="color:#fff;font-size:8px;font-weight:600;">dyf-form</div>
+        </div>
+        <div style="flex:1;background:#0f3460;border-radius:4px;padding:6px;text-align:center;">
+          <div style="color:#e94560;font-size:11px;">📊</div>
+          <div style="color:#fff;font-size:8px;font-weight:600;">dyf-grid</div>
+        </div>
+        <div style="flex:1;background:#0f3460;border-radius:4px;padding:6px;text-align:center;">
+          <div style="color:#e94560;font-size:11px;">🔍</div>
+          <div style="color:#fff;font-size:8px;font-weight:600;">dyf-detail</div>
+        </div>
+      </div>
+      <!-- Code snippet -->
+      <div style="background:#0d0d1a;border-radius:4px;padding:6px;color:#a78bfa;font-family:monospace;font-size:7px;line-height:1.5;">
+        <span style="color:#e94560;">npm</span> install @gustavopals/dynaform<br>
+        <span style="color:#64748b;">// define o dicionário e use os componentes</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Hero centralizado + Features + Código</h3>
+      <p>Headline grande no centro, 3 cards de componentes, snippet de código, e CTAs para Demo e Builder. Clássico e direto.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a2e;padding:16px;min-height:220px;font-size:9px;color:#94a3b8;">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:rgba(255,255,255,.05);border-radius:5px;margin-bottom:8px;">
+        <span style="color:#fff;font-weight:700;">⬡ DYNAFORM</span>
+        <div style="display:flex;gap:8px;">
+          <span>Docs</span><span style="background:#e94560;color:#fff;padding:2px 7px;border-radius:3px;">Builder</span>
+        </div>
+      </div>
+      <!-- Hero: texto à esquerda + preview à direita -->
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <div style="flex:1;">
+          <div style="color:#fff;font-size:12px;font-weight:800;line-height:1.3;margin-bottom:5px;">Auto-gere<br>interfaces <span style="color:#e94560;">CRUD</span><br>do JSON</div>
+          <div style="color:#64748b;margin-bottom:8px;font-size:7px;">PO-UI · Angular 19</div>
+          <div style="background:#e94560;color:#fff;padding:4px 8px;border-radius:4px;font-size:7px;display:inline-block;">Testar Demo →</div>
+        </div>
+        <div style="flex:1;background:#0f1a2e;border-radius:5px;padding:8px;border:1px solid rgba(233,69,96,.2);">
+          <div style="color:#64748b;font-size:7px;margin-bottom:4px;">preview</div>
+          <div style="background:#0d0d1a;border-radius:3px;padding:4px;font-size:6.5px;color:#a78bfa;font-family:monospace;line-height:1.6;">
+            &lt;<span style="color:#e94560;">dyf-grid</span><br>
+            &nbsp;&nbsp;[table]="TABLE"<br>
+            &nbsp;&nbsp;[items]="items"&gt;<br>
+            &lt;/<span style="color:#e94560;">dyf-grid</span>&gt;
+          </div>
+        </div>
+      </div>
+      <!-- Steps: como funciona -->
+      <div style="background:#0f1a2e;border-radius:4px;padding:6px;margin-bottom:6px;">
+        <div style="color:#e94560;font-size:7px;font-weight:700;margin-bottom:4px;">COMO FUNCIONA</div>
+        <div style="display:flex;gap:4px;">
+          <div style="flex:1;text-align:center;"><div style="color:#fff;font-size:9px;">1️⃣</div><div style="color:#94a3b8;font-size:6.5px;">Define JSON</div></div>
+          <div style="color:#334155;font-size:10px;display:flex;align-items:center;">→</div>
+          <div style="flex:1;text-align:center;"><div style="color:#fff;font-size:9px;">2️⃣</div><div style="color:#94a3b8;font-size:6.5px;">Usa componentes</div></div>
+          <div style="color:#334155;font-size:10px;display:flex;align-items:center;">→</div>
+          <div style="flex:1;text-align:center;"><div style="color:#fff;font-size:9px;">3️⃣</div><div style="color:#94a3b8;font-size:6.5px;">CRUD pronto</div></div>
+        </div>
+      </div>
+      <div style="background:#e94560;border-radius:4px;padding:4px;text-align:center;color:#fff;font-size:7px;font-weight:700;">ABRIR BUILDER DE CAMPOS →</div>
+    </div>
+    <div class="card-body">
+      <h3>B — Split Hero + Steps + CTA Builder</h3>
+      <p>Hero em duas colunas (texto + código), seção "como funciona" em 3 passos, e destaque grande para o Builder. Mais narrativo.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a2e;padding:16px;min-height:220px;font-size:9px;color:#94a3b8;">
+      <!-- Nav -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:rgba(255,255,255,.05);border-radius:5px;margin-bottom:8px;">
+        <span style="color:#fff;font-weight:700;">⬡ DYNAFORM</span>
+        <div style="display:flex;gap:6px;">
+          <span style="background:#e94560;color:#fff;padding:2px 7px;border-radius:3px;">npm i</span>
+          <span style="border:1px solid #334155;color:#94a3b8;padding:2px 7px;border-radius:3px;">Demo</span>
+        </div>
+      </div>
+      <!-- Badge + Headline grande -->
+      <div style="text-align:center;padding:8px 0 6px;">
+        <div style="display:inline-block;background:rgba(233,69,96,.15);border:1px solid rgba(233,69,96,.4);color:#e94560;font-size:7px;padding:2px 8px;border-radius:20px;margin-bottom:6px;">Angular 19 · PO-UI · npm</div>
+        <div style="color:#fff;font-size:14px;font-weight:900;line-height:1.2;margin-bottom:4px;">CRUD em<br><span style="background:linear-gradient(90deg,#e94560,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">minutos</span></div>
+        <div style="color:#64748b;font-size:7.5px;margin-bottom:8px;">Defina campos em JSON → DynaForm gera tudo</div>
+      </div>
+      <!-- Instalação em destaque -->
+      <div style="background:#0d0d1a;border:1px solid rgba(233,69,96,.3);border-radius:5px;padding:6px;font-family:monospace;color:#a78bfa;font-size:8px;text-align:center;margin-bottom:7px;">
+        $ npm install <span style="color:#e94560;">@gustavopals/dynaform</span>
+      </div>
+      <!-- 3 blocos: form, grid, detail com ícones grandes -->
+      <div style="display:flex;gap:5px;margin-bottom:7px;">
+        <div style="flex:1;border:1px solid rgba(233,69,96,.2);border-radius:5px;padding:7px;text-align:center;">
+          <div style="color:#e94560;font-size:14px;margin-bottom:3px;">⊞</div>
+          <div style="color:#fff;font-size:8px;font-weight:700;">&lt;dyf-form&gt;</div>
+          <div style="color:#64748b;font-size:6.5px;">Formulário CRUD</div>
+        </div>
+        <div style="flex:1;border:1px solid rgba(233,69,96,.2);border-radius:5px;padding:7px;text-align:center;">
+          <div style="color:#e94560;font-size:14px;margin-bottom:3px;">⊟</div>
+          <div style="color:#fff;font-size:8px;font-weight:700;">&lt;dyf-grid&gt;</div>
+          <div style="color:#64748b;font-size:6.5px;">Tabela listagem</div>
+        </div>
+        <div style="flex:1;border:1px solid rgba(233,69,96,.2);border-radius:5px;padding:7px;text-align:center;">
+          <div style="color:#e94560;font-size:14px;margin-bottom:3px;">⊡</div>
+          <div style="color:#fff;font-size:8px;font-weight:700;">&lt;dyf-detail&gt;</div>
+          <div style="color:#64748b;font-size:6.5px;">Detalhe readonly</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:5px;">
+        <div style="flex:1;background:#e94560;color:#fff;padding:4px;border-radius:4px;text-align:center;font-size:7px;font-weight:700;">Ver Demo ao vivo</div>
+        <div style="flex:1;border:1px solid #334155;color:#94a3b8;padding:4px;border-radius:4px;text-align:center;font-size:7px;">Montar campos →</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Hero impactante + Install + 3 componentes</h3>
+      <p>Headline gigante, comando de instalação em destaque, 3 cards dos componentes com descrição, dois CTAs. Foco total em conversão.</p>
+    </div>
+  </div>
+
+</div>
