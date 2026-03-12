@@ -7,6 +7,8 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+# A biblioteca precisa ser compilada antes do demo app (o alias 'dynaform' aponta para dist/dynaform)
+RUN npm run build -- dynaform --configuration production
 RUN npm run build -- dynaform-demo --configuration production
 
 # Stage 2: Serve with nginx
