@@ -94,4 +94,4 @@ export class AppModule { }
 5. [x] Implementar tela de visualização dinâmica
 6. [x] Criar interface de cadastro do dicionário
 7. [ ] Publicar primeira versão no npm
-8. [ ] Documentação e exemplos de uso
+8. [x] Documentação e exemplos de uso
