@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1024">
+  <title>DynaForm — Auto-generates CRUD interfaces from JSON · Angular 19 · PO-UI</title>
+  <meta name="description" content="Biblioteca Angular que gera formulário, grid e detalhe automaticamente a partir de um dicionário JSON de campos. Usa PO-UI v19.">
+  <meta property="og:title" content="DynaForm — CRUD interfaces from JSON">
+  <meta property="og:description" content="Auto-generates dyf-form, dyf-grid and dyf-detail from a DyfTable dictionary. Angular 19 + PO-UI.">
+  <meta property="og:url" content="https://gustavopals.github.io/dyna-form/landing/">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0a0a0f;
+      --surface:      rgba(255,255,255,.03);
+      --border:       rgba(255,255,255,.07);
+      --accent:       #e94560;
+      --accent-dark:  #c02040;
+      --text:         #e2e8f0;
+      --text-muted:   #64748b;
+      --text-dim:     #94a3b8;
+      --code-bg:      #080811;
+      --purple:       #a78bfa;
+      --green:        #34d399;
+      --blue:         #60a5fa;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-width: 1024px;
+    }
+
+    /* ── Utilitários ── */
+    .section-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background .15s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,.15);
+      color: var(--text-dim);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      background: transparent;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.35); color: var(--text); }
+
+    /* ── Navbar ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      transition: background .2s;
+    }
+    nav.scrolled { background: rgba(10,10,15,.95); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-hex {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-install {
+      background: var(--accent);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-install:hover { background: var(--accent-dark); color: #fff; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 88px 48px 72px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(233,69,96,.10);
+      border: 1px solid rgba(233,69,96,.35);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(90deg, var(--accent), #f97316);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-install {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .hero-install .dollar { color: var(--accent); }
+    .hero-install .pkg    { color: var(--text); }
+
+    .copy-btn {
+      font-size: 11px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 3px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s, color .15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,.1); color: var(--text); }
+    .copy-btn.copied { color: var(--green); border-color: var(--green); }
+  </style>
+</head>
+<body>
+
+  <!-- ① NAVBAR -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-hex"></div>
+      <span class="nav-logo-text">DYNAFORM</span>
+    </a>
+    <div class="nav-links">
+      <a href="#quick-start">Docs</a>
+      <a href="../">Demo</a>
+      <a href="../builder">Builder</a>
+      <a href="https://github.com/gustavopals/dyna-form" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#install" class="nav-install">npm install</a>
+    </div>
+  </nav>
+
+  <!-- ② HERO -->
+  <section class="hero" id="install">
+    <div class="hero-badge">⬡ Angular 19 · PO-UI · Open Source</div>
+    <h1>Gere interfaces <span class="gradient">CRUD</span><br>a partir de um JSON</h1>
+    <p class="hero-sub">Defina seus campos uma vez, reutilize em formulário, grid e detalhe — sem repetição, sem boilerplate.</p>
+    <div class="hero-ctas">
+      <a href="../" class="btn-primary">▶ Ver Demo ao vivo</a>
+      <a href="../builder" class="btn-outline">Montar campos →</a>
+    </div>
+    <div class="hero-install">
+      <span class="dollar">$</span>
+      <span class="pkg">npm install @gustavopals/dynaform</span>
+      <button class="copy-btn" onclick="copyInstall(this)">copiar</button>
+    </div>
+  </section>
+
+</body>
+</html>
