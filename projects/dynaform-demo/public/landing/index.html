@@ -667,5 +667,24 @@
     <span>by Gustavo Pals</span>
   </footer>
 
+  <script>
+    // Navbar scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Copy install command
+    function copyInstall(btn) {
+      navigator.clipboard.writeText('npm install @gustavopals/dynaform').then(() => {
+        btn.textContent = '✓ copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'copiar';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>
