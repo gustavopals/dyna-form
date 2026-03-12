@@ -224,6 +224,131 @@
     }
     .copy-btn:hover { background: rgba(255,255,255,.1); color: var(--text); }
     .copy-btn.copied { color: var(--green); border-color: var(--green); }
+
+    /* ── Seção genérica ── */
+    section { padding: 80px 48px; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* ── Componentes ── */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .comp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: border-color .2s, transform .2s;
+    }
+    .comp-card:hover {
+      border-color: rgba(233,69,96,.4);
+      transform: translateY(-2px);
+    }
+
+    .comp-icon { font-size: 32px; margin-bottom: 14px; }
+
+    .comp-tag {
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .comp-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .comp-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ── Como funciona ── */
+    .steps-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* linha conectora entre steps */
+    .steps-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.5% + 28px);
+      right: calc(16.5% + 28px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233,69,96,.4), transparent);
+      pointer-events: none;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .step { text-align: center; padding: 0 24px; }
+
+    .step-num {
+      width: 60px;
+      height: 60px;
+      background: rgba(233,69,96,.08);
+      border: 2px solid rgba(233,69,96,.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--accent);
+      margin: 0 auto 18px;
+    }
+
+    .step h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .step p code {
+      font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(233,69,96,.08);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -256,6 +381,63 @@
       <span class="dollar">$</span>
       <span class="pkg">npm install @gustavopals/dynaform</span>
       <button class="copy-btn" onclick="copyInstall(this)">copiar</button>
+    </div>
+  </section>
+
+  <!-- ③ COMPONENTES -->
+  <section id="componentes">
+    <div class="section-header">
+      <span class="section-label">O que você ganha</span>
+      <h2>Três componentes, zero repetição</h2>
+      <p>Um único dicionário de campos alimenta tudo</p>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-icon">📋</div>
+        <div class="comp-tag">&lt;dyf-form&gt;</div>
+        <div class="comp-title">Formulário CRUD</div>
+        <div class="comp-desc">Cria e edita registros. Campos com validação, máscara, select e agrupamento por abas.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">📊</div>
+        <div class="comp-tag">&lt;dyf-grid&gt;</div>
+        <div class="comp-title">Grid de listagem</div>
+        <div class="comp-desc">Tabela com colunas automáticas, paginação, busca e ações de editar, excluir e detalhe.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">🔍</div>
+        <div class="comp-tag">&lt;dyf-detail&gt;</div>
+        <div class="comp-title">Detalhe readonly</div>
+        <div class="comp-desc">Exibe um registro formatado para leitura, com labels e valores dos campos configurados.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ COMO FUNCIONA -->
+  <section id="como-funciona" style="background: rgba(233,69,96,.02);">
+    <div class="section-header">
+      <span class="section-label">Fluxo</span>
+      <h2>Três passos para ter um CRUD</h2>
+      <p>Do JSON ao produto final em minutos</p>
+    </div>
+    <div class="steps-wrapper">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Defina o dicionário</h3>
+          <p>Crie um objeto <code>DyfTable</code> com campos, tipos e opções. Use o Builder visual ou escreva na mão.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Use os componentes</h3>
+          <p>Passe o <code>DyfTable</code> para <code>&lt;dyf-form&gt;</code>, <code>&lt;dyf-grid&gt;</code> ou <code>&lt;dyf-detail&gt;</code> via @Input.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>CRUD pronto</h3>
+          <p>DynaForm gera formulários, colunas e layouts automaticamente. Sem código repetitivo.</p>
+        </div>
+      </div>
     </div>
   </section>
 
